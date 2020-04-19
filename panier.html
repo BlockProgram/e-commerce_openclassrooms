@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="Vente de meubles en chêne en ligne. Livraison gratuite en France et en Belgique."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+      integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="main.css" />
+    <title>Meubles en chêne - Orinoco</title>
+  </head>
+  <body>
+    <header>
+      <div class="header__container">
+        <a href="/">
+          <p class="header__title header__home">Accueil</p>
+        </a>
+      </div>
+      <div class="header__container">
+        <a href="/">
+          <h1 class="header__company">Orimeubles</h1>
+        </a>
+      </div>
+      <div class="header__container">
+        <a class="header__cart-container" href="panier.html">
+          <i class="header__cart fas fa-cart-arrow-down"></i>
+          <p class="header__title header__cart-title">
+            Panier <span>(0)</span>
+          </p>
+        </a>
+      </div>
+    </header>
+    <section class="content__container">
+      <h2 class="panier__title">Panier <span>(3 articles)</span></h2>
+      <div class="panier__items-container">
+        <div class="panier__item-container">
+          <h3 class="panier__item-name">Table en chêne authentique</h3>
+          <h3 class="panier__item-price">3000€</h3>
+        </div>
+        <div class="panier__item-container">
+          <h3 class="panier__item-name">Tabouret en chêne authentique</h3>
+          <h3 class="panier__item-price">1000€</h3>
+        </div>
+        <div class="panier__item-container">
+          <h3 class="panier__item-name">Tabouret en chêne authentique</h3>
+          <h3 class="panier__item-price">1000€</h3>
+        </div>
+        <div class="panier__item-container">
+          <p class="panier__total-text">Total</p>
+          <p class="panier__total-price">5000€</p>
+        </div>
+      </div>
+
+      <h2 class="panier__title">Passer commande</h2>
+      <form class="panier__form-container">
+        <label for="first__name">Prénom</label>
+        <input type="text" name="first__name" />
+        <label for="last__name">Nom</label>
+        <input type="text" name="last__name" />
+        <label for="email">Email</label>
+        <input type="email" name="email" />
+
+        <label for="birth__date">Date de naissance</label>
+        <input type="date" name="birth__date" />
+
+        <label for="adress__street"
+          >Libellé de la voie ( ex: 15 rue paul )</label
+        >
+        <input type="text" name="adress__street" />
+        <label for="adress__street-more"
+          >Complément d'adresse (Bâtiment, Appartement...)</label
+        >
+        <input type="text" name="adress__street-more" />
+
+        <label for="adress__zipcode">Code Postal</label>
+        <input type="text" name="adress__zipcode" pattern="\d{5}" />
+        <label for="adress__city">Ville</label>
+        <input type="text" name="adress__city" />
+      </form>
+      <a href="confirmation.html">
+        <button class="panier__validate-cart">Valider la commande</button>
+      </a>
+    </section>
+    <footer>
+      <div class="footer__container">
+        <a href="/">
+          <p class="footer__title footer__home">Accueil</p>
+        </a>
+        <a href="/">
+          <p class="footer__title">Mentions Légales</p>
+        </a>
+      </div>
+      <div class="footer__container">
+        <a href="/">
+          <i class="footer__link fab fa-facebook-square"></i>
+        </a>
+        <a href="/">
+          <i class="footer__link fab fa-twitter-square"></i>
+        </a>
+        <a href="/">
+          <i class="footer__link fab fa-linkedin"></i>
+        </a>
+      </div>
+      <div class="footer__container">
+        <a href="/">
+          <p class="footer__title">Contact</p>
+        </a>
+      </div>
+    </footer>
+  </body>
+</html>
