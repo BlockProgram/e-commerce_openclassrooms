@@ -42,55 +42,48 @@
       </div>
     </header>
     <section class="content__container">
-      <h2 class="panier__title">Panier <span>(3 articles)</span></h2>
+      <h2 class="panier__title">Panier <span>(x articles)</span></h2>
       <div class="panier__items-container">
-        <div class="panier__item-container">
-          <h3 class="panier__item-name">Table en chêne authentique</h3>
-          <h3 class="panier__item-price">3000€</h3>
-        </div>
-        <div class="panier__item-container">
-          <h3 class="panier__item-name">Tabouret en chêne authentique</h3>
-          <h3 class="panier__item-price">1000€</h3>
-        </div>
-        <div class="panier__item-container">
-          <h3 class="panier__item-name">Tabouret en chêne authentique</h3>
-          <h3 class="panier__item-price">1000€</h3>
-        </div>
-        <div class="panier__item-container">
+        <div class="panier__item-container total-container">
           <p class="panier__total-text">Total</p>
-          <p class="panier__total-price">5000€</p>
+          <p class="panier__total-price"></p>
         </div>
       </div>
 
       <h2 class="panier__title">Passer commande</h2>
       <form class="panier__form-container">
         <label for="first__name">Prénom</label>
-        <input type="text" name="first__name" />
+        <input type="text" id="first__name" />
+        <small>Error message</small>
         <label for="last__name">Nom</label>
-        <input type="text" name="last__name" />
+        <input type="text" id="last__name" />
+        <small>Error message</small>
         <label for="email">Email</label>
-        <input type="email" name="email" />
+        <input type="email" id="email" />
+        <small>Error message</small>
 
         <label for="birth__date">Date de naissance</label>
-        <input type="date" name="birth__date" />
+        <input type="date" id="birth__date" />
+        <small>Error message</small>
 
-        <label for="adress__street"
-          >Libellé de la voie ( ex: 15 rue paul )</label
-        >
-        <input type="text" name="adress__street" />
-        <label for="adress__street-more"
-          >Complément d'adresse (Bâtiment, Appartement...)</label
-        >
-        <input type="text" name="adress__street-more" />
+        <label for="adress__street">Libellé de la voie</label>
+        <input type="text" id="adress__street" placeholder="ex: 15 rue paul" />
+        <small>Error message</small>
+        <label for="adress__street-more">Complément d'adresse </label>
+        <input
+          type="text"
+          id="adress__street-more"
+          placeholder="(Bâtiment, Appartement...)"
+        />
 
         <label for="adress__zipcode">Code Postal</label>
-        <input type="text" name="adress__zipcode" pattern="\d{5}" />
+        <input type="text" id="adress__zipcode" pattern="\d{5}" />
+        <small>Error message</small>
         <label for="adress__city">Ville</label>
-        <input type="text" name="adress__city" />
+        <input type="text" id="adress__city" />
+        <small>Error message</small>
       </form>
-      <a href="confirmation.html">
-        <button class="panier__validate-cart">Valider la commande</button>
-      </a>
+      <button class="panier__validate-btn" disabled>Valider la commande</button>
     </section>
     <footer>
       <div class="footer__container">
@@ -118,5 +111,6 @@
         </a>
       </div>
     </footer>
+    <script src="main.js"></script>
   </body>
 </html>

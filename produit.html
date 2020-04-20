@@ -35,30 +35,25 @@
       <div class="header__container">
         <a class="header__cart-container" href="panier.html">
           <i class="header__cart fas fa-cart-arrow-down"></i>
-          <p class="header__title header__cart-title">
-            Panier <span>(0)</span>
-          </p>
+          <p class="header__title header__cart-title">Panier <span>()</span></p>
         </a>
       </div>
     </header>
     <section>
       <div class="product__container">
         <aside class="product__img-container">
-          <img class="product__img" src="images/oak_3.jpg" />
+          <img class="product__img" />
         </aside>
         <div class="product__text-container">
-          <h2 class="product__name">Table de collection véritable</h2>
-          <h3 class="product__vernis-text">Séléctionner le vernis</h3>
+          <h2 class="product__name"></h2>
+          <h3 class="product__vernis-text">
+            Séléctionner le vernis du produit :
+          </h3>
           <select name="" id="" class="product__vernis-select"></select>
-          <p class="product__details">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde
-            tenetur alias animi iste molestias, ex sunt ad culpa eos
-            consequatur, laboriosam quas obcaecati assumenda saepe recusandae
-            vero ipsam in est?
-          </p>
+          <p class="product__details"></p>
         </div>
         <div class="product__cart-container">
-          <p class="product__price">500€</p>
+          <p class="product__price"></p>
           <p class="product__quantity-text">Quantité</p>
           <select name="" id="" class="product__quantity-select">
             <option value="1">1</option>
@@ -72,7 +67,13 @@
             <option value="9">9</option>
             <option value="10">10</option>
           </select>
-          <button class="product__add-cart">Ajouter au Panier</button>
+          <p class="product__total-price">Total : <span></span></p>
+          <button class="product__btn btn__add-cart">Ajouter au Panier</button>
+          <a href="panier.html">
+            <button class="product__btn btn__order-now">
+              Passer Commande
+            </button>
+          </a>
         </div>
       </div>
     </section>
@@ -102,5 +103,6 @@
         </a>
       </div>
     </footer>
+    <script src="main.js"></script>
   </body>
 </html>
