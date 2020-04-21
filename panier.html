@@ -51,39 +51,63 @@
       </div>
 
       <h2 class="panier__title">Passer commande</h2>
-      <form class="panier__form-container">
-        <label for="first__name">Prénom</label>
-        <input type="text" id="first__name" />
-        <small>Error message</small>
-        <label for="last__name">Nom</label>
-        <input type="text" id="last__name" />
-        <small>Error message</small>
-        <label for="email">Email</label>
-        <input type="email" id="email" />
-        <small>Error message</small>
-
-        <label for="birth__date">Date de naissance</label>
-        <input type="date" id="birth__date" />
-        <small>Error message</small>
-
-        <label for="adress__street">Libellé de la voie</label>
-        <input type="text" id="adress__street" placeholder="ex: 15 rue paul" />
-        <small>Error message</small>
-        <label for="adress__street-more">Complément d'adresse </label>
-        <input
-          type="text"
-          id="adress__street-more"
-          placeholder="(Bâtiment, Appartement...)"
-        />
-
-        <label for="adress__zipcode">Code Postal</label>
-        <input type="text" id="adress__zipcode" pattern="\d{5}" />
-        <small>Error message</small>
-        <label for="adress__city">Ville</label>
-        <input type="text" id="adress__city" />
-        <small>Error message</small>
-      </form>
-      <button class="panier__validate-btn" disabled>Valider la commande</button>
+      <div class="panier__form-container">
+        <form id="form" class="form">
+          <div class="form-control">
+            <label for="first__name">Prénom</label>
+            <input type="text" id="first__name" class="input-data" />
+            <small>Error message</small>
+          </div>
+          <div class="form-control">
+            <label for="last__name">Nom</label>
+            <input type="text" id="last__name" class="input-data" />
+            <small>Error message</small>
+          </div>
+          <div class="form-control">
+            <label for="email">Email</label>
+            <input type="text" id="email" class="input-data" />
+            <small>Error message</small>
+          </div>
+          <div class="form-control">
+            <label for="birth__date">Date de naissance</label>
+            <input type="date" id="birth__date" />
+            <small>Error message</small>
+          </div>
+          <div class="form-control">
+            <label for="adress__street">Rue</label>
+            <input
+              type="text"
+              id="adress__street"
+              placeholder="ex: 15 rue paul"
+              class="input-data"
+            />
+            <small>Error message</small>
+          </div>
+          <div class="form-control" id="street-more-container">
+            <label for="adress__street-more">Complément</label>
+            <input
+              type="text"
+              id="adress__street-more"
+              placeholder="(Bâtiment, Appartement...)"
+              class="input-data"
+            />
+            <small>Error message</small>
+          </div>
+          <div class="form-control">
+            <label for="adress__zipcode">Code postal</label>
+            <input type="number" id="adress__zipcode" />
+            <small>Error message</small>
+          </div>
+          <div class="form-control">
+            <label for="adress__city">Ville </label>
+            <input type="text" id="adress__city" class="input-data" />
+            <small>Error message</small>
+          </div>
+          <button class="panier__validate-btn">
+            Valider la commande
+          </button>
+        </form>
+      </div>
     </section>
     <footer>
       <div class="footer__container">

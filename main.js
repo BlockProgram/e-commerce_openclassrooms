@@ -40,6 +40,7 @@ getData()
   .then(function (response) {
     apiData = JSON.parse(response);
 
+    console.log(apiData);
     // Load list only on Homepage
     if (window.location.href == "http://127.0.0.1:5500/") {
       displayList();
@@ -156,40 +157,142 @@ if (window.location.href == "http://127.0.0.1:5500/panier.html") {
   localStorage.setItem("totalPrice", totalToPay);
 }
 
-const panierValidateBtn = document.querySelector(".panier__validate-btn");
+const form = document.getElementById("form");
+const allFormControls = document.querySelectorAll(".form-control");
+const InputsData = document.querySelectorAll(".input-data");
 const firstName = document.getElementById("first__name");
 const lastName = document.getElementById("last__name");
 const email = document.getElementById("email");
 const birthDate = document.getElementById("birth__date");
 const adressStreet = document.getElementById("adress__street");
-const adressStreetMore = document.getElementById("adress__street-more");
+const streetMoreContainer = document.getElementById("street-more-container");
 const adressZipCode = document.getElementById("adress__zipcode");
 const adressCity = document.getElementById("adress__city");
+const validateCartBtn = document.querySelector(".panier__validate-btn");
 
 // Form validation on PANIER Page
 if (window.location.href == "http://127.0.0.1:5500/panier.html") {
-  function checkNames(firstName, lastName) {
-    const regex = /\D{2,30}/;
-    if (regex.test(firstName.value) && regex.test(lastName.value)) {
-      alert("passed");
-    } else if (!regex.test(lastName.value) && !regex.test(firstName.value)) {
-      alert("first name & last name not valid");
-    } else if (!regex.test(firstName.value)) {
-      alert("first name not valid");
-    } else if (!regex.test(lastName.value)) {
-      alert("last name not valid");
+  // Display error message and red outline input
+  function showError(input, message) {
+    const formControl = input.parentElement;
+    formControl.className = "form-control error";
+    const small = formControl.querySelector("small");
+    small.innerText = message;
+  }
+
+  // Display green outline input
+  function showSuccess(input) {
+    const formControl = input.parentElement;
+    formControl.className = "form-control success";
+  }
+
+  // Check if email is valid
+  function checkEmail(input) {
+    const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (regex.test(input.value.trim())) {
+      showSuccess(input);
+    } else {
+      showError(input, "Email invalide");
     }
   }
 
+  // Check if ZIP Code is valid (5 chiffres)
+  function checkZipCode(input) {
+    const regex = /^\d{5}$/;
+    if (regex.test(input.value.trim())) {
+      showSuccess(input);
+    } else {
+      showError(input, "Code postal invalide");
+    }
+  }
+
+  // Check required fields
+  function checkRequired(inputArray) {
+    inputArray.forEach(function (input) {
+      if (input.value.trim() === "") {
+        showError(input, "Ce champ est obligatoire");
+      } else {
+        showSuccess(input);
+      }
+    });
+  }
+
   // Generate Order ID
-  function generateOrderId() {}
+  let order_number = +localStorage.getItem("order_number") || 0;
+  let order_id = "";
+  function generateOrderId() {
+    order_number += 1;
+    localStorage.setItem("order_number", order_number);
+  }
 
   // Check Inputs when form is submitted
-  panierValidateBtn.addEventListener("click", () => {
-    checkNames(firstName, lastName);
+  validateCartBtn.addEventListener("click", function (e) {
+    e.preventDefault();
 
-    // If all inputs are valid, trigger Order ID generation function
+    checkRequired([firstName, lastName, birthDate, adressStreet, adressCity]);
+    checkEmail(email);
+    checkZipCode(adressZipCode);
+    streetMoreContainer.classList.add("success");
+
+    checkAllFields();
   });
+
+  // Check all fields. If valid POST request, generate Order ID & redirect to CONFIRMATION page and
+  function checkAllFields() {
+    let checkedCount = 0;
+
+    allFormControls.forEach((item) => {
+      if (item.classList.contains("success")) {
+        checkedCount += 1;
+      }
+    });
+
+    if (checkedCount == 8) {
+      formatRequestData();
+      generateOrderId();
+      // window.location.href = "http://127.0.0.1:5500/confirmation.html";
+    } else {
+      window.scrollTo(0, 500);
+    }
+  }
+
+  // Format data before POST request to server
+  let contact = {};
+  let contactData = {};
+  let postRequest = {};
+  let postResponse = [];
+  function formatRequestData() {
+    InputsData.forEach((input) => {
+      const formControl = input.parentElement;
+      const label = formControl.querySelector("label");
+      contactData[label.innerText] = input.value;
+
+      contact = {
+        prénom: contactData.Prénom,
+        nom: contactData.Nom,
+        adresse: contactData.Rue,
+        ville: contactData.Ville,
+        email: contactData.Email,
+      };
+    });
+
+    // Product_id table formatting
+    let productsObject = JSON.parse(localStorage.getItem("cartDetails"));
+    let product_id = [];
+    productsObject.forEach((item) => {
+      product_id.push(JSON.stringify(item));
+    });
+    postRequest = { contact, product_id };
+    postData();
+  }
+
+  // POST request function
+  function postData() {
+    var request = new XMLHttpRequest();
+    request.open("POST", "http://localhost:3000/api/furniture/order");
+    request.setRequestHeader("Content-Type", "application/json");
+    request.send(JSON.stringify(postRequest));
+  }
 }
 
 // Order CONFIRMATION Page
@@ -198,7 +301,7 @@ const confirmationId = document.querySelector(".confirmation__id span");
 
 if (window.location.href == "http://127.0.0.1:5500/confirmation.html") {
   confirmationPrice.textContent = localStorage.getItem("totalPrice") + "€";
-  confirmationId.textContent = "Generated ID";
+  confirmationId.textContent = `cmd-${localStorage.getItem("order_number")}`;
 }
 
 // Event listeners
