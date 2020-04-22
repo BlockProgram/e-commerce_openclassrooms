@@ -147,10 +147,11 @@ button:hover {
   cursor: pointer;
 }
 
-button:disabled {
-  background-color: #ccc;
-  border: 2px solid red;
-  cursor: default;
+select {
+  background-color: var(--secondary-color);
+  font-size: 13px;
+  height: 30px;
+  margin: 10px 0 50px;
 }
 
 /* HEADER STYLES */
@@ -324,14 +325,14 @@ footer {
 }
 
 .product__vernis-select {
-  margin: 7px 0 50px;
+  width: 200px;
 }
 
 .product__cart-container {
   align-items: center;
   border: 1px solid var(--secondary-color);
   display: flex;
-  height: 340px;
+  height: 360px;
   flex-direction: column;
   margin: 0 20px;
 }
@@ -348,7 +349,7 @@ footer {
 }
 
 .product__quantity-select {
-  margin: 7px 0 50px;
+  width: 50px;
 }
 
 .product__total-price {

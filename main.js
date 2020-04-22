@@ -1,5 +1,4 @@
 const articlesContainer = document.querySelector(".articles__container");
-const articleContainer = document.querySelector(".article__container");
 const productImg = document.querySelector(".product__img");
 const productName = document.querySelector(".product__name");
 const productVernis = document.querySelector(".product__vernis-select");
@@ -14,7 +13,6 @@ const panierTitleOrder = document.querySelector(".panier__title span");
 const panierItemsContainer = document.querySelector(".panier__items-container");
 const panierTotalContainer = document.querySelector(".total-container");
 const panierTotalPrice = document.querySelector(".panier__total-price");
-const quantityOrder = document.querySelector(".panier__item-name span ");
 
 // API call function
 function getData() {
@@ -157,7 +155,6 @@ if (window.location.href == "http://127.0.0.1:5500/panier.html") {
   localStorage.setItem("totalPrice", totalToPay);
 }
 
-const form = document.getElementById("form");
 const allFormControls = document.querySelectorAll(".form-control");
 const InputsData = document.querySelectorAll(".input-data");
 const firstName = document.getElementById("first__name");
@@ -188,7 +185,7 @@ if (window.location.href == "http://127.0.0.1:5500/panier.html") {
 
   // Check if email is valid
   function checkEmail(input) {
-    const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (regex.test(input.value.trim())) {
       showSuccess(input);
     } else {
@@ -219,7 +216,6 @@ if (window.location.href == "http://127.0.0.1:5500/panier.html") {
 
   // Generate Order ID
   let order_number = +localStorage.getItem("order_number") || 0;
-  let order_id = "";
   function generateOrderId() {
     order_number += 1;
     localStorage.setItem("order_number", order_number);
@@ -260,7 +256,7 @@ if (window.location.href == "http://127.0.0.1:5500/panier.html") {
   let contact = {};
   let contactData = {};
   let postRequest = {};
-  let postResponse = [];
+
   function formatRequestData() {
     InputsData.forEach((input) => {
       const formControl = input.parentElement;
@@ -282,12 +278,15 @@ if (window.location.href == "http://127.0.0.1:5500/panier.html") {
     productsObject.forEach((item) => {
       product_id.push(JSON.stringify(item));
     });
+    // Include 2 variables
     postRequest = { contact, product_id };
+    console.log(postRequest);
     postData();
   }
 
   // POST request function
   function postData() {
+    console.log(postRequest, "postRequest");
     var request = new XMLHttpRequest();
     request.open("POST", "http://localhost:3000/api/furniture/order");
     request.setRequestHeader("Content-Type", "application/json");
