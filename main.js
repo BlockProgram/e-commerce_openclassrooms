@@ -14,6 +14,9 @@ const panierItemsContainer = document.querySelector(".panier__items-container");
 const panierTotalContainer = document.querySelector(".total-container");
 const panierTotalPrice = document.querySelector(".panier__total-price");
 
+// Dom Content Loaded Event Listener
+window.addEventListener("DOMContentLoaded", () => {});
+
 // API call function
 function getData() {
   return new Promise(function (resolve, reject) {
@@ -40,7 +43,7 @@ getData()
 
     console.log(apiData);
     // Load list only on Homepage
-    if (window.location.href == "http://127.0.0.1:5500/") {
+    if (window.location.href == "http://127.0.0.1:5500/index.html") {
       displayList();
     } else if (window.location.href == "http://127.0.0.1:5500/produit.html") {
       loadProductPage();
@@ -59,15 +62,13 @@ function displayList() {
     linkEl.setAttribute("href", "produit.html");
     linkEl.setAttribute("id", rank);
     linkEl.classList.add("article__container");
-    linkEl.innerHTML = `<img class="article__img" id="${rank}" src="${
-      item.imageUrl
-    }"/>
-        <div id="${rank}" class="article__details-container">
-          <h2 id="${rank}" class="article__name">${item.name}</h2>
-          <h3 id="${rank}" class="article__price">${item.price / 100 + "€"}</h3>
-          <h4 id="${rank}" class="article__details">${item.description}</h4>
+    linkEl.innerHTML = `<img class="${rank}"  src="${item.imageUrl}"/>
+        <div class="${rank}">
+          <h2 class="${rank}">${item.name}</h2>
+          <h3  class="${rank}">${item.price / 100 + "€"}</h3>
+          <h4 class="${rank}">${item.description}</h4>
         </div>
-        <button class="article__btn">Fiche Produit</button>`;
+        <button class="${rank}">Fiche Produit</button>`;
 
     articlesContainer.appendChild(linkEl);
     rank++;
@@ -185,7 +186,7 @@ if (window.location.href == "http://127.0.0.1:5500/panier.html") {
 
   // Check if email is valid
   function checkEmail(input) {
-    const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (regex.test(input.value.trim())) {
       showSuccess(input);
     } else {
@@ -214,13 +215,6 @@ if (window.location.href == "http://127.0.0.1:5500/panier.html") {
     });
   }
 
-  // Generate Order ID
-  let order_number = +localStorage.getItem("order_number") || 0;
-  function generateOrderId() {
-    order_number += 1;
-    localStorage.setItem("order_number", order_number);
-  }
-
   // Check Inputs when form is submitted
   validateCartBtn.addEventListener("click", function (e) {
     e.preventDefault();
@@ -245,7 +239,6 @@ if (window.location.href == "http://127.0.0.1:5500/panier.html") {
 
     if (checkedCount == 8) {
       formatRequestData();
-      generateOrderId();
       // window.location.href = "http://127.0.0.1:5500/confirmation.html";
     } else {
       window.scrollTo(0, 500);
@@ -259,16 +252,13 @@ if (window.location.href == "http://127.0.0.1:5500/panier.html") {
 
   function formatRequestData() {
     InputsData.forEach((input) => {
-      const formControl = input.parentElement;
-      const label = formControl.querySelector("label");
-      contactData[label.innerText] = input.value;
-
+      contactData[input.id] = input.value;
       contact = {
-        prénom: contactData.Prénom,
-        nom: contactData.Nom,
-        adresse: contactData.Rue,
-        ville: contactData.Ville,
-        email: contactData.Email,
+        prenom: contactData.first__name,
+        nom: contactData.last__name,
+        adresse: contactData.adress__street,
+        ville: contactData.adress__city,
+        email: contactData.email,
       };
     });
 
@@ -286,7 +276,6 @@ if (window.location.href == "http://127.0.0.1:5500/panier.html") {
 
   // POST request function
   function postData() {
-    console.log(postRequest, "postRequest");
     var request = new XMLHttpRequest();
     request.open("POST", "http://localhost:3000/api/furniture/order");
     request.setRequestHeader("Content-Type", "application/json");
@@ -305,9 +294,13 @@ if (window.location.href == "http://127.0.0.1:5500/confirmation.html") {
 
 // Event listeners
 // Save clicked item on homepage
-if (window.location.href == "http://127.0.0.1:5500/") {
+if (window.location.href == "http://127.0.0.1:5500/index.html") {
   window.addEventListener("click", (e) => {
-    localStorage.setItem("product", e.target.id);
+    if (!e.target.id) {
+      localStorage.setItem("product", e.target.className);
+    } else {
+      localStorage.setItem("product", e.target.id);
+    }
   });
 }
 

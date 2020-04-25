@@ -219,33 +219,33 @@ header {
   text-decoration: none;
 }
 
-.article__img {
+.article__container img {
   height: 100%;
   width: 100%;
 }
 
-.article__details-container {
+.article__container div {
   display: grid;
   grid-template-rows: repeat(3, 1fr);
   margin-left: 50px;
 }
 
-.article__name {
+.article__container h2 {
   font-size: 18px;
   font-weight: bold;
 }
 
-.article__price {
+.article__container h3 {
   color: var(--primary-color);
   font-size: 23px;
   font-weight: bold;
 }
 
-.article__details {
+.article__container h4 {
   margin: 20px 0;
 }
 
-.article__btn {
+.article__container button {
   background-color: var(--primary-btn-color);
   color: #fff;
   font-size: 15px;
@@ -397,7 +397,11 @@ footer {
 .panier__title {
   font-size: 18px;
   font-weight: bold;
-  margin: 30px 0 40px;
+  margin: 30px 30px 40px;
+}
+
+.panier__title:nth-of-type(2) {
+  margin: 40px 30px;
 }
 
 .panier__items-container {
@@ -432,10 +436,6 @@ footer {
 
 .panier__item-price {
   color: var(--primary-color);
-}
-
-.panier__title:nth-of-type(2) {
-  margin: 40px 0;
 }
 
 .form {
