@@ -18,7 +18,10 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="main.css" />
-    <title>Meubles en chêne - Orinoco</title>
+
+    <script async src="./js/main.js"></script>
+    <script async src="./js/produit.js"></script>
+    <title>Fiche Produit - Orinoco</title>
   </head>
   <body>
     <header>
@@ -41,15 +44,44 @@
         </a>
       </div>
     </header>
-    <section class="confirmation__container">
-      <p class="confirmation__thanks">
-        Merci pour votre commande sur orimeubles.com ! Vous allez recevoir un
-        récapitulatif de votre commande par email.
-      </p>
-
-      <p class="confirmation__price">Prix total : <span></span></p>
-      <p class="confirmation__id">Identifiant de commande : <span></span></p>
-    </section>
+    <main>
+      <div class="product__container">
+        <aside class="product__img-container">
+          <img class="product__img" />
+        </aside>
+        <div class="product__text-container">
+          <h2 class="product__name"></h2>
+          <h3 class="product__vernis-text">
+            Séléctionner le vernis du produit :
+          </h3>
+          <select name="" id="" class="product__vernis-select"></select>
+          <p class="product__details"></p>
+        </div>
+        <div class="product__cart-container">
+          <p class="product__price"></p>
+          <p class="product__quantity-text">Quantité</p>
+          <select name="" id="" class="product__quantity-select">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+          <p class="product__total-price">Total : <span></span></p>
+          <button class="product__btn btn__add-cart">Ajouter au Panier</button>
+          <a href="panier.html">
+            <button class="product__btn btn__order-now">
+              Passer Commande
+            </button>
+          </a>
+        </div>
+      </div>
+    </main>
     <footer>
       <div class="footer__container">
         <a href="index.html">
@@ -76,6 +108,5 @@
         </a>
       </div>
     </footer>
-    <script src="main.js"></script>
   </body>
 </html>
