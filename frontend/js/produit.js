@@ -30,6 +30,7 @@ function loadProductPage() {
   productTotalPrice.textContent = productPrice.textContent;
 }
 
+cartAmount = +localStorage.getItem("cartAmount");
 // Update cart amount on UI and store items
 function updateCart() {
   cartAmount += 1;
@@ -38,6 +39,7 @@ function updateCart() {
 
   let item = {
     name: apiData[productToLoad].name,
+    _id: apiData[productToLoad]._id,
     quantity: productQuantity.value,
     totalprice: `${
       (productQuantity.value * apiData[productToLoad].price) / 100

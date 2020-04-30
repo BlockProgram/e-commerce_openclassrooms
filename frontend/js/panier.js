@@ -110,9 +110,8 @@ function checkAllFields() {
 
   if (checkedCount == 8) {
     formatRequestData();
-    // window.location.href = "http://127.0.0.1:5500/confirmation.html";
   } else {
-    window.scrollTo(0, 500);
+    window.scrollTo(0, 455);
   }
 }
 
@@ -135,20 +134,27 @@ function formatRequestData() {
 
   // Product_id table formatting
   let productsObject = JSON.parse(localStorage.getItem("cartDetails"));
-  let product_id = [];
+  let products = [];
   productsObject.forEach((item) => {
-    product_id.push(JSON.stringify(item));
+    products.push(item);
   });
-  // Include 2 variables
-  postRequest = { contact, product_id };
+  postRequest = { contact, products };
   console.log(postRequest);
   postData();
 }
 
 // POST request function
 function postData() {
-  var request = new XMLHttpRequest();
-  request.open("POST", "http://localhost:3000/api/furniture/order");
-  request.setRequestHeader("Content-Type", "application/json");
-  request.send(JSON.stringify(postRequest));
+  var req = new XMLHttpRequest();
+  req.open("POST", "http://localhost:3000/api/furniture/order");
+  req.setRequestHeader("Content-Type", "application/json");
+  req.send(JSON.stringify(postRequest));
+
+  req.onreadystatechange = (e) => {
+    if (req.readyState > 3 && req.status == 201) {
+      let response = JSON.parse(req.response);
+      localStorage.setItem("orderId", response.orderId);
+      window.location.href = "http://127.0.0.1:5500/frontend/confirmation.html";
+    }
+  };
 }
