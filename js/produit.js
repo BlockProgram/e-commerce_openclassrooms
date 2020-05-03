@@ -8,6 +8,7 @@ const productQuantity = document.querySelector(".product__quantity-select");
 const addToCartBtn = document.querySelector(".btn__add-cart");
 const orderNowBtn = document.querySelector(".btn__order-now");
 
+let cartDetails = JSON.parse(localStorage.getItem("cartDetails")) || [];
 const productToLoad = window.location.href.split("=")["1"];
 let getProductFromId = "";
 
