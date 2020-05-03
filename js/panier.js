@@ -6,6 +6,7 @@ const panierTotalPrice = document.querySelector(".panier__total-price");
 // Update Number of articles on PANIER Page
 panierTitleOrder.textContent = `(${cartAmount} articles)`;
 
+let cartDetails = JSON.parse(localStorage.getItem("cartDetails")) || [];
 let totalToPay = 0;
 
 // Print content of cart to PANIER page
@@ -154,7 +155,8 @@ function postData() {
     if (req.readyState > 3 && req.status == 201) {
       let response = JSON.parse(req.response);
       localStorage.setItem("orderId", response.orderId);
-      window.location.href = "http://127.0.0.1:5500/frontend/confirmation.html";
+      window.location.href =
+        "https://blockprogram.github.io/e-commerce_openclassrooms/confirmation.html";
     }
   };
 }

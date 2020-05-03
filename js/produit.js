@@ -8,17 +8,31 @@ const productQuantity = document.querySelector(".product__quantity-select");
 const addToCartBtn = document.querySelector(".btn__add-cart");
 const orderNowBtn = document.querySelector(".btn__order-now");
 
-let productToLoad = localStorage.getItem("product");
+const productToLoad = window.location.href.split("=")["1"];
+let getProductFromId = "";
+
+// Call API and store response inside array. Display some results on UI
+getData()
+  .then(function (response) {
+    getProductFromId = JSON.parse(response).find(
+      (element) => element._id === productToLoad
+    );
+    // Load list only on Homepage
+    loadProductPage(JSON.parse(response));
+  })
+  .catch(function (error) {
+    console.error("Failed!", error);
+  });
 
 // Load product page with clicked item on homepage
-function loadProductPage() {
-  productName.textContent = apiData[productToLoad].name;
-  productDetails.textContent = apiData[productToLoad].description;
-  productPrice.textContent = `${apiData[productToLoad].price / 100 + "€"}`;
-  productImg.setAttribute("src", `${apiData[productToLoad].imageUrl}`);
+function loadProductPage(apiData) {
+  productName.textContent = getProductFromId.name;
+  productDetails.textContent = getProductFromId.description;
+  productPrice.textContent = `${getProductFromId.price / 100 + "€"}`;
+  productImg.setAttribute("src", `${getProductFromId.imageUrl}`);
 
   // Insert vernis options
-  let vernisOptions = apiData[productToLoad].varnish;
+  let vernisOptions = getProductFromId.varnish;
 
   vernisOptions.forEach((vernis) => {
     let newOption = document.createElement("option");
@@ -38,12 +52,10 @@ function updateCart() {
   localStorage.setItem("cartAmount", cartAmount);
 
   let item = {
-    name: apiData[productToLoad].name,
-    _id: apiData[productToLoad]._id,
+    name: getProductFromId.name,
+    _id: getProductFromId._id,
     quantity: productQuantity.value,
-    totalprice: `${
-      (productQuantity.value * apiData[productToLoad].price) / 100
-    }`,
+    totalprice: `${(productQuantity.value * getProductFromId.price) / 100}`,
   };
 
   cartDetails.push(item);
@@ -60,7 +72,7 @@ if (cartAmount >= 1) {
 //Recalculate total price if quantity changes
 productQuantity.addEventListener("change", (e) => {
   productTotalPrice.textContent = `${
-    (apiData[productToLoad].price / 100) * e.target.value + "€"
+    (getProductFromId.price / 100) * e.target.value + "€"
   }`;
 });
 

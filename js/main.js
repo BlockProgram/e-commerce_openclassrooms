@@ -17,30 +17,8 @@ function getData() {
   });
 }
 
-let apiData = [];
-
-// Call API and store response inside array. Display some results on UI
-getData()
-  .then(function (response) {
-    apiData = JSON.parse(response);
-
-    console.log(apiData);
-    // Load list only on Homepage
-    if (window.location.href == "http://127.0.0.1:5500/frontend/index.html") {
-      displayList();
-    } else if (
-      window.location.href == "http://127.0.0.1:5500/frontend/produit.html"
-    ) {
-      loadProductPage();
-    }
-  })
-  .catch(function (error) {
-    console.error("Failed!", error);
-  });
-
 // Initial Cart values
 let cartAmount = +localStorage.getItem("cartAmount");
 localStorage.getItem("cartAmount") !== null
   ? (headerCartText.textContent = `(${localStorage.getItem("cartAmount")})`)
   : (headerCartText.textContent = "(0)");
-let cartDetails = JSON.parse(localStorage.getItem("cartDetails")) || [];
