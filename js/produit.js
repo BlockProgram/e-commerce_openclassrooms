@@ -46,6 +46,7 @@ function loadProductPage(apiData) {
 }
 
 cartAmount = +localStorage.getItem("cartAmount");
+headerCartText = document.querySelector(".header__cart-title span");
 // Update cart amount on UI and store items
 function updateCart() {
   cartAmount += 1;

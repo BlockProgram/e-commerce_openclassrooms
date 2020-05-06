@@ -1,4 +1,4 @@
-const headerCartText = document.querySelector(".header__cart-title span");
+let headerCartText = document.querySelector(".header__cart-title span");
 
 // API call function
 function getData() {
@@ -17,8 +17,9 @@ function getData() {
   });
 }
 
-// Initial Cart values
 let cartAmount = +localStorage.getItem("cartAmount");
+
+// Initial Cart values
 localStorage.getItem("cartAmount") !== null
   ? (headerCartText.textContent = `(${localStorage.getItem("cartAmount")})`)
   : (headerCartText.textContent = "(0)");

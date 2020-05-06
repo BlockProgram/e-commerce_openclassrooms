@@ -16,13 +16,13 @@ function displayList(apiData) {
     let linkEl = document.createElement("a");
     linkEl.setAttribute("href", `produit.html?id=${item._id}`);
     linkEl.classList.add("article__container");
-    linkEl.innerHTML = `<img class=""  src="${item.imageUrl}"/>
-          <div class="">
-            <h2 class="">${item.name}</h2>
-            <h3  class="">${item.price / 100 + "€"}</h3>
-            <h4 class="$">${item.description}</h4>
+    linkEl.innerHTML = `<img src="${item.imageUrl}"/>
+          <div>
+            <h2>${item.name}</h2>
+            <h3>${item.price / 100 + "€"}</h3>
+            <h4>${item.description}</h4>
           </div>
-          <button class="">Fiche Produit</button>`;
+          <button>Fiche Produit</button>`;
 
     articlesContainer.appendChild(linkEl);
   });
