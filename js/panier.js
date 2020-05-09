@@ -156,7 +156,7 @@ function postData() {
     if (req.readyState > 3 && req.status == 201) {
       let response = JSON.parse(req.response);
       localStorage.setItem("orderId", response.orderId);
-      window.location.href = "http://127.0.0.1:5500/confirmation.html";
+      window.location.href = "confirmation.html";
     }
   };
 }
