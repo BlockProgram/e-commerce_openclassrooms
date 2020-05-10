@@ -3,3 +3,5 @@ const confirmationId = document.querySelector(".confirmation__id span");
 
 confirmationPrice.textContent = localStorage.getItem("totalPrice") + "€";
 confirmationId.textContent = localStorage.getItem("orderId");
+
+localStorage.clear();
